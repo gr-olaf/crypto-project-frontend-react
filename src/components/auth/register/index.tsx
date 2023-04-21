@@ -1,17 +1,5 @@
-import {
-	TextField,
-	Button,
-	Typography,
-	createTheme,
-	ThemeProvider,
-} from '@mui/material';
+import { TextField, Button, Typography } from '@mui/material';
 import { IPropsRegister } from '../../../common/types/auth';
-
-const theme = createTheme({
-	typography: {
-		fontFamily: ['Poppins', 'sans-serif'].join(','),
-	},
-});
 
 const RegisterPage: React.FC<IPropsRegister> = (
 	props: IPropsRegister
@@ -26,7 +14,7 @@ const RegisterPage: React.FC<IPropsRegister> = (
 	} = props;
 
 	return (
-		<ThemeProvider theme={theme}>
+		<>
 			<Typography variant="h2" textAlign="center">
 				Регистрация
 			</Typography>
@@ -88,7 +76,7 @@ const RegisterPage: React.FC<IPropsRegister> = (
 					Авторизация
 				</span>
 			</Typography>
-		</ThemeProvider>
+		</>
 	);
 };
 
