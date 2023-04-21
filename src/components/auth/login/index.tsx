@@ -1,23 +1,11 @@
-import {
-	TextField,
-	Button,
-	Typography,
-	createTheme,
-	ThemeProvider,
-} from '@mui/material';
+import { TextField, Button, Typography } from '@mui/material';
 import { IPropsLogin } from '../../../common/types/auth';
-
-const theme = createTheme({
-	typography: {
-		fontFamily: ['Poppins', 'sans-serif'].join(','),
-	},
-});
 
 const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
 	const { setEmail, setPassword, navigate } = props;
 
 	return (
-		<ThemeProvider theme={theme}>
+		<>
 			<Typography variant="h2" textAlign="center">
 				Авторизация
 			</Typography>
@@ -54,7 +42,7 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
 					Регистрация
 				</span>
 			</Typography>
-		</ThemeProvider>
+		</>
 	);
 };
 
