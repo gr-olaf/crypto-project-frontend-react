@@ -1,0 +1,27 @@
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 30px 15px;
+	cursor: pointer;
+}
+
+.navBar {
+	width: 100%;
+}
+
+.navList {
+	margin-bottom: 55px;
+}
+
+.navItem {
+	&:hover {
+		background-color: #1900d5;
+		color: #ffffff;
+		border-radius: 4px;
+	}
+}
+
+.logoutBar {
+	width: 100%;
+}

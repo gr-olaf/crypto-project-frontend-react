@@ -7,6 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { tokens } from '../../theme';
 import { ColorModeContext } from '../../theme';
+import styles from './styles.module.scss';
 
 const TopBarComponent = () => {
 	const { user } = useAppSelector((state) => state.auth);
@@ -16,24 +17,21 @@ const TopBarComponent = () => {
 
 	return (
 		<Box
+			className={styles.root}
 			sx={{
-				display: 'flex',
-				justifyContent: 'space-between',
-				px: '32px',
-				py: '24px',
+				backgroundColor: colors.primary.DEFAULT,
+				borderBottom: `1px solid ${colors.borderColor}`,
 			}}
 		>
 			<Grid>Welcome {user.firstName}</Grid>
-			<Box
-				sx={{
-					display: 'flex',
-					alignItems: 'center',
-				}}
-			>
+			<Box className={styles.iconBar}>
 				<Grid
 					sx={{ pr: '37px', borderRight: `1px solid ${colors.borderColor}` }}
 				>
-					<IconButton onClick={colorMode.toggleColorMode} sx={{ mr: '45px' }}>
+					<IconButton
+						onClick={colorMode.toggleColorMode}
+						className={styles.themeIcon}
+					>
 						{theme.palette.mode === 'dark' ? (
 							<DarkModeIcon />
 						) : (
@@ -45,17 +43,15 @@ const TopBarComponent = () => {
 					</IconButton>
 				</Grid>
 				<Grid
+					className={styles.searchBar}
 					sx={{
-						display: 'flex',
-						borderRadius: '8px',
-						ml: '28px',
 						backgroundColor: `${colors.primary[600]}`,
 					}}
 				>
-					<IconButton sx={{ '&:hover': { background: 'transparent' } }}>
+					<IconButton className={styles.searchIcon}>
 						<SearchIcon />
 					</IconButton>
-					<InputBase placeholder="Поиск" />
+					<InputBase className={styles.searchInput} placeholder="Поиск" />
 				</Grid>
 			</Box>
 		</Box>
