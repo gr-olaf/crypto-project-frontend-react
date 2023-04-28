@@ -12,18 +12,17 @@ import {
 	useTheme,
 } from '@mui/material';
 import {
-	HomeOutlined,
 	ChevronLeftOutlined,
 	ChevronRightOutlined,
-	AutoGraphOutlined,
-	MenuBookOutlined,
-	SettingsOutlined,
 	LogoutOutlined,
 } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { tokens } from '../../theme';
 import FlexBetween from '../flex-between';
+import { navMenu } from '../../common/moks/navigate';
+import Logo from '../../assets/images/side-bar/logo.svg';
+import styles from './styles.module.scss';
 
 const SideBarComponent = (props: any) => {
 	const [active, setActive] = useState('');
@@ -47,21 +46,32 @@ const SideBarComponent = (props: any) => {
 					anchor="left"
 					sx={{
 						width: drawerWidth,
-						'&.MuiDrawer-paper': {
+						'& .MuiDrawer-paper': {
 							color: `${colors.secondary.DEFAULT}`,
-							background: `${colors.white.DEFAULT}`,
+							background: `${colors.primary.DEFAULT}`,
 							boxSizing: 'border-box',
 							width: drawerWidth,
 						},
 					}}
 				>
-					<Box sx={{ width: '100%' }}>
+					<Box
+						className={styles.navBar}
+						sx={{ borderBottom: `1px solid ${colors.borderColor}` }}
+					>
 						<Box>
 							<FlexBetween>
-								<Box
-									sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}
-								>
-									<Typography>Demo</Typography>
+								<Box className={styles.brand}>
+									<img src={Logo} alt="Logo" />
+									<Typography
+										variant="h1"
+										color={
+											theme.palette.mode === 'dark'
+												? colors.white.DEFAULT
+												: colors.black.DEFAULT
+										}
+									>
+										Demo
+									</Typography>
 								</Box>
 								{!isNonMobile && (
 									<IconButton onClick={() => setIsOpen(!isOpen)}>
@@ -70,6 +80,49 @@ const SideBarComponent = (props: any) => {
 								)}
 							</FlexBetween>
 						</Box>
+						<List className={styles.navList}>
+							{navMenu.map((element) => {
+								return (
+									<ListItem key={element.id}>
+										<ListItemButton
+											className={styles.navItem}
+											sx={{
+												'&:hover': {
+													'& .MuiSvgIcon-root': { color: colors.white.DEFAULT },
+												},
+											}}
+											onClick={() => navigate(element.path)}
+										>
+											<ListItemIcon>{element.icon}</ListItemIcon>
+											<ListItemText>
+												<Typography variant="body1">{element.name}</Typography>
+											</ListItemText>
+										</ListItemButton>
+									</ListItem>
+								);
+							})}
+						</List>
+					</Box>
+					<Box
+						className={styles.logoutBar}
+						sx={{
+							'&:hover': {
+								'& .MuiSvgIcon-root': { color: colors.white.DEFAULT },
+							},
+						}}
+					>
+						<List>
+							<ListItem>
+								<ListItemButton className={styles.navItem}>
+									<ListItemIcon>
+										<LogoutOutlined />
+									</ListItemIcon>
+									<ListItemText>
+										<Typography>Выход</Typography>
+									</ListItemText>
+								</ListItemButton>
+							</ListItem>
+						</List>
 					</Box>
 				</Drawer>
 			)}
